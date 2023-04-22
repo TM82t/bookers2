@@ -1,2 +1,9 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<div>
+  <h3><%= @user.name %></h3>
+  <%= image_tag @user.get_profile_image(100, 100) %>
+  <% if @user ==  current_user %>
+   <p><%= link_to "User info", edit_user_path(@user) %></p>
+  <% end %>
+</div>
+
+<%= render 'post_images/list', post_images: @post_images %>
