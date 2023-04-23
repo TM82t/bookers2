@@ -1,29 +1,17 @@
 <p id="notice">
   <%= flash[:notice] %>
 </p>
-<div class="container">
- <div class="row">
-  <div class="col-md-3">
-    <h2>User info</h2>
-    <p><%= image_tag @user.get_profile_image(100,100) %></p>
-    <table>
-    <tbody>
-     <tr>
-      <td>name</td>
-      <td><%= @user.name %></td>
-     </tr>
-     <tr>
-      <td>introduction</td>
-      <td><%= @user.introduction %></td>
-     </tr>
-    </tbody>
-   </table>
-  </div>
+<h1>User info</h1>
+ <p><%= @user.get_profile_image(80,80) %></p>
+ <table>
+  <% @user.each do |f| %>
+  <tbody>
 
-
+ </table>
+ 
 <div class="row">
-  <%= link_to edit_user_path(@user.id) ,class: "btn btn-outline-secondary btn-block" do %>
-   <i class="fas fa-user-cog"></i>
+  <%= link_to edit_user_path(user.id) do %>
+   <i class="fas fa-user-cog" class="btn btn-outline-secondary btn-block"></i>
   <% end %>
 </div>
 
@@ -55,9 +43,7 @@
   <div class="form-group">
     <%= f.submit 'Create Book', class: "btn btn-success" %>
   </div>
-  <% end %>
- </div>
-</div>
+<% end %>
 
 <div class="col-md-8 offset-md-1">
 <h2>User</h2>
@@ -72,16 +58,13 @@
   </thead>
 
   <tbody>
-  <% @books.each do |f| %>
+  <% @users.each do |f| %>
    <tr>
-    <td><%= f.profile_image %></td>
-    <td><%= f.title %></td>
-    <td><%= f.introduction %></td>
-    <td><%= link_to "Edit" ,edit_book_path(f.id)%></td>
-    <td><%= link_to "Destroy", book_path(f.id), method: :delete, "data-confirm" => "本当に消しますか？" %></td>
+    <td><%= f.profile_tag %></td>
+    <td><%= f.name %></td>
+    <td><%= link_to "Show" ,f_path(:id)%></td>
    </tr>
   <% end %>
   </tbody>
  </table>
  </div>
-</div>

@@ -1,2 +1,95 @@
-<h1>Books#index</h1>
-<p>Find me in app/views/books/index.html.erb</p>
+<p id="notice">
+  <%= flash[:notice] %>
+</p>
+<div class="container">
+ <div class="row">
+  <div class="col-md-3">
+    <h2>User info</h2>
+    <p><%= image_tag @users.get_profile_image(100,100) %></p>
+    <table class="table">
+    <tbody>
+     <tr>
+      <td>name</td>
+      <td><%= @user.name %></td>
+     </tr>
+     <tr>
+      <td>introduction</td>
+      <td><%= @user.introduction %></td>
+     </tr>
+    </tbody>
+   </table>
+
+
+　　<div class="row">
+ 　　 <%= link_to edit_user_path(@user.id) ,class: "btn btn-outline-secondary btn-block" do %>
+  　　 <i class="fas fa-user-cog"></i>
+ 　　 <% end %>
+　　</div>
+
+
+　<h2 class="mt-3">New book</h2>
+
+  <% if @book.errors.any? %>
+  　<div id="error_explanation">
+    　<h2><%= @book.errors.count %>errors prohibited this book from being saved %></h2>
+    　　<ul>
+     　　 <% @book.errors.full_messages.each do |message| %>
+       　 <li><%= message %></li>
+      　<% end %>
+    　　</ul>
+    </div>
+  <% end %>
+
+  <%= form_with model: @book do |f| %>
+   <div class="form-group">
+    <label>Title</label>
+     <div class="field">
+     <%= f.text_field :title %>
+     </div>
+   </div>
+
+   <div>
+    <label>Opinion</label>
+    <div class="field">
+      <%= f.text_area :body %>
+    </div>
+   </div>
+
+    <div class="form-group">
+      <%= f.submit 'Create Book', class: "btn btn-success" %>
+    </div>
+   <% end %>
+  </div>
+
+
+  <div class="col-md-8 offset-md-1">
+  <h2>Books</h2>
+   <table class="table table-hover table-inverse">
+    <thead>
+     <tr>
+      <th></th>
+      <th>Title</th>
+      <th>Opinion</th>
+      <th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @books.each do |f| %>
+     <tr>
+      <td><%= link_to user_id_path(@users) %>
+       <%= f.profile_image %>
+      </td>
+      <td><%= link_to user_id_path(@users) %>
+       <%= f.title %>
+      </td>
+      <td><%= f.body %></td>
+     </tr>
+    <% end %>
+    </tbody>
+   </table>
+   </div>
+  </div>
+
+ </div>
+</div>
