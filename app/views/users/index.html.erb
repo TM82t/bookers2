@@ -1,70 +1,67 @@
 <p id="notice">
   <%= flash[:notice] %>
 </p>
-<h1>User info</h1>
- <p><%= @user.get_profile_image(80,80) %></p>
- <table>
-  <% @user.each do |f| %>
-  <tbody>
+<div class="container">
+ <div class="row">
+  <div class="col-md-3">
 
- </table>
- 
-<div class="row">
-  <%= link_to edit_user_path(user.id) do %>
-   <i class="fas fa-user-cog" class="btn btn-outline-secondary btn-block"></i>
+  <%= render 'userinfo', user: @user %>
+
+  <h2 class="mt-3">New book</h2>
+
+  <% if @book.errors.any? %>
+    <div id="error_explanation">
+     <h2><%= @book.errors.count %>errors prohibited this book from being saved %></h2>
+      <ul>
+       <% @book.errors.full_messages.each do |message| %>
+       <li><%= message %></li>
+       <% end %>
+      </ul>
+    </div>
   <% end %>
-</div>
 
+  <%= form_with model: @book do |f| %>
+   <div class="form-group">
+    <label>Title</label>
+     <div class="field">
+     <%= f.text_field :title %>
+     </div>
+   </div>
 
-<h2 class="mt-3">New book</h2>
+   <div>
+    <label>Opinion</label>
+    <div class="field">
+      <%= f.text_area :body %>
+    </div>
+   </div>
 
-<% if @book.errors.any? %>
-<div id="error_explanation">
-  <h2><%= @book.errors.count %>errors prohibited this book from being saved %></h2>
-  <ul>
-    <% @book.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
+    <div class="form-group">
+      <%= f.submit 'Create Book', class: "btn btn-success" %>
+    </div>
+   <% end %>
+  </div>
+
+  <div class="col-md-8 offset-md-1">
+  <h2>User</h2>
+   <table>
+    <thead>
+     <tr>
+      <th>image</th>
+      <th>name</th>
+      <th></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @users.each do |f| %>
+     <tr>
+      <td><%= f.profile_tag %></td>
+      <td><%= f.name %></td>
+      <td><%= link_to "Show" ,f_path(:id)%></td>
+     </tr>
     <% end %>
-  </ul>
+    </tbody>
+   </table>
   </div>
-<% end %>
-
-<%= form_with model: @book do |f| %>
-  <document>Title</document>
-  <div class="field">
-   <%= f.text_field :title %>
-  </div>
-
-  <document>Opinion</document>
-  <div class="field">
-    <%= f.text_area :body %>
-  </div>
-
-  <div class="form-group">
-    <%= f.submit 'Create Book', class: "btn btn-success" %>
-  </div>
-<% end %>
-
-<div class="col-md-8 offset-md-1">
-<h2>User</h2>
-
- <table>
-  <thead>
-   <tr>
-    <th>image</th>
-    <th>name</th>
-    <th></th>
-  </tr>
-  </thead>
-
-  <tbody>
-  <% @users.each do |f| %>
-   <tr>
-    <td><%= f.profile_tag %></td>
-    <td><%= f.name %></td>
-    <td><%= link_to "Show" ,f_path(:id)%></td>
-   </tr>
-  <% end %>
-  </tbody>
- </table>
  </div>
+</div>

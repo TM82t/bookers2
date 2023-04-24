@@ -4,28 +4,8 @@
 <div class="container">
  <div class="row">
   <div class="col-md-3">
-    <h2>User info</h2>
-    <p><%= image_tag @users.get_profile_image(100,100) %></p>
-    <table class="table">
-    <tbody>
-     <tr>
-      <td>name</td>
-      <td><%= @user.name %></td>
-     </tr>
-     <tr>
-      <td>introduction</td>
-      <td><%= @user.introduction %></td>
-     </tr>
-    </tbody>
-   </table>
 
-
-　　<div class="row">
- 　　 <%= link_to edit_user_path(@user.id) ,class: "btn btn-outline-secondary btn-block" do %>
-  　　 <i class="fas fa-user-cog"></i>
- 　　 <% end %>
-　　</div>
-
+  <%= render 'userinfo', user: @user %>
 
 　<h2 class="mt-3">New book</h2>
 
@@ -77,19 +57,21 @@
     <tbody>
     <% @books.each do |f| %>
      <tr>
-      <td><%= link_to user_id_path(@users) %>
-       <%= f.profile_image %>
+      <td>
+       <%= link_to book_path(f.id) do %>
+        <%= image_tag f.user.get_profile_image(80,80) %>
+       <% end %>
       </td>
-      <td><%= link_to user_id_path(@users) %>
-       <%= f.title %>
+      <td>
+       <%= link_to book_path(f.id) do %>
+        <%= f.title %>
+       <% end %>
       </td>
       <td><%= f.body %></td>
      </tr>
     <% end %>
     </tbody>
    </table>
-   </div>
   </div>
-
  </div>
 </div>
