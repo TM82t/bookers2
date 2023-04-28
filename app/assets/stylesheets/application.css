@@ -74,3 +74,7 @@ label {
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
+ul {
+    display: block;
+    list-style-type: disc;
+}
