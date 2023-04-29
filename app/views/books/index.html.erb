@@ -56,7 +56,7 @@
     <% @books.each do |f| %>
      <tr>
       <td>
-       <%= link_to book_path(f.id) do %>
+       <%= link_to user_path(f.id) do %>
         <%= image_tag f.user.get_profile_image(80,80) %>
        <% end %>
       </td>

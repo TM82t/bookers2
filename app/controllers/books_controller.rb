@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+  before_action :authenticate_user!
   before_action :correct_user, only: [:edit, :update]
 
   def new
@@ -11,7 +12,7 @@ class BooksController < ApplicationController
     @book.user_id = current_user.id
     if @book.save
       flash[:notice] = "You have created book successfully."
-      redirect_to book_path(@book.user_id)
+      redirect_to book_path(@book.id)
     else
       @books = Book.all
       render("books/index")
